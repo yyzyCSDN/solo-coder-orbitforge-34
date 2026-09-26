@@ -1,8 +1,11 @@
 from __future__ import annotations
-from .timeline import Timeline, Activity
 
-def greedy_schedule(candidates):
-    timeline = Timeline()
+from .timeline import Timeline
+from .resource_timeline import ResourceModel
+
+
+def greedy_schedule(candidates, resource_model: ResourceModel | None = None):
+    timeline = Timeline(resource_model)
     rejected = []
     for a in sorted(candidates, key=lambda x: (-x.priority, x.window.end_tai_s, x.name)):
         try:
